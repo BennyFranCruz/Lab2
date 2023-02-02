@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 
 def main():
     with serial.Serial ('COMx', 115200) as s_port:     
-       s_port.write ()
-       data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
+        s_port.write ()
+        data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
+        
     data_array = [[b'1',b'2'], [b'4',b'5', b'6'], ['hello' ,7], [], ['h', 'j', 'k']]
     float_array = []
     float_list = []
