@@ -17,6 +17,7 @@ import utime
 
 import motor_driver    #Classes we have written for driving the motor and reading the encoder
 import encoder_reader
+import porportional_controller
 
 def main():
     """!
@@ -48,18 +49,16 @@ def main():
     
     #using the motor drivers set duty cycle function, tells the motor to operate forwards, backwards, and stop at
     #2 second intervals
-    utime.sleep(2)
-    moe.set_duty_cycle (-20)
-    utime.sleep(2)
-    moe.set_duty_cycle (50)
-    utime.sleep(2)
-    moe.set_duty_cycle (0)
-    utime.sleep(2)
+    
+    controller = porportional_controller.PorportionalController(1, 1)
     
     #forever loops a call of the encoders read command, setting the variable count to the position of the motor
     while (True):
-        count = encode.read()
-        utime.sleep(.5)
+        position = encode.read()
+        control_output = controller.run(0, position)
+        
+        moe.set_duty_cycle(control_output)
+        utime.sleep(.05)
 
        
 if __name__ == "__main__":
