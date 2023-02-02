@@ -43,7 +43,6 @@ class MotorDriver:
         @param   level The pwm signal as a percent to be sent to the motor
         @returns none
         """
-        print(level)
         #this logic ensures that if a negative number is inputed into the function, the motor will reverse direction.
         if(level < 0):
             self.pin1 = self.ch1.pulse_width_percent(0)
