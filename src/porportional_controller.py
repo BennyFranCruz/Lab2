@@ -7,7 +7,11 @@ class PorportionalController:
         
     def run(self, setpoint, position):
         
-        self.p_control_out = self.Kp*(setpoint - position)
+        self.p_control_out = -self.Kp*(setpoint - position)
+        if self.p_control_out > 100:
+            self.p_control_out = 100
+        elif self.p_control_out <-100:
+            self.p_control_out = -100
         
         return self.p_control_out
     

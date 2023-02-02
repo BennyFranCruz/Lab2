@@ -22,7 +22,7 @@ import porportional_controller
 def main():
     """!
     Main code of program which initializes the encoder, the motor driver, runs the motor through a series of pwm speeds,
-    then prints the encoder output every .5 seconds.
+    then prints the encoder output every .5 seconds.print
     
     @param   Always when run as "__main__"
     @returns none
@@ -50,15 +50,16 @@ def main():
     #using the motor drivers set duty cycle function, tells the motor to operate forwards, backwards, and stop at
     #2 second intervals
     
-    controller = porportional_controller.PorportionalController(1, 1)
+    controller = porportional_controller.PorportionalController(.01, 1)
     
     #forever loops a call of the encoders read command, setting the variable count to the position of the motor
     while (True):
         position = encode.read()
-        control_output = controller.run(0, position)
+        control_output = controller.run(-180000, position)
         
+        #print(control_output)
         moe.set_duty_cycle(control_output)
-        utime.sleep(.05)
+        utime.sleep(.01)
 
        
 if __name__ == "__main__":
