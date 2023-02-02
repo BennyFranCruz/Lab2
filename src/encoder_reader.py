@@ -51,7 +51,7 @@ class Encoder:
         elif(delta < (((-1 * period) + 1)/2)):
             delta += period + 1 
         self.position += delta
-        print(self.position)
+        return self.position
         
     def zero(self):
         """!
