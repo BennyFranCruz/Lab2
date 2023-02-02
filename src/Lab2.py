@@ -57,7 +57,6 @@ def main():
         position = encode.read()
         control_output = controller.run(-180000, position)
         
-        #print(control_output)
         moe.set_duty_cycle(control_output)
         utime.sleep(.01)
 
