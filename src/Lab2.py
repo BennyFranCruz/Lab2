@@ -48,19 +48,15 @@ def main():
     
     #using the motor drivers set duty cycle function, tells the motor to operate forwards, backwards, and stop at
     #2 second intervals
-    utime.sleep(2)
-    moe.set_duty_cycle (-20)
-    utime.sleep(2)
-    moe.set_duty_cycle (50)
-    utime.sleep(2)
-    moe.set_duty_cycle (0)
-    utime.sleep(2)
-    
     #forever loops a call of the encoders read command, setting the variable count to the position of the motor
+    data_x = []
+    data_y = []
     while (True):
-        count = encode.read()
-        utime.sleep(.5)
-
+        position = encode.read()
+        data_x.append(position)
+        daya_y.append(utime.ticks_ms())
+        
+        
        
 if __name__ == "__main__":
     main()
