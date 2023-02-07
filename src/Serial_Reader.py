@@ -2,21 +2,23 @@ import serial
 import matplotlib.pyplot as plt
 
 def main():
-    with serial.Serial ('COMx', 115200) as s_port:     
-        s_port.write (input('kp Value')
-        s_port.write (input('setPoint Value')
-   
-   while (True):              
+    with serial.Serial ('COM3', 115200) as s_port:
+        #input1 = input('kp Value ')
+        #print(input1)
+        #input1 = bytes(input1, 'utf-8')
+        s_port.write (b'something')
+'''
+    while (True):              
         try:
-        with serial.Serial ('COMx', 115200) as s_port:     
-            data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
+            with serial.Serial ('COM3', 115200) as s_port:     
+                data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
         
-        except UnicodeError: #run and see what error happens 
+        except UnicodeError: #run and see what error happens
             break
                      
     float_array = []
     float_list = []
-    
+
     for line in data_array:
         for val in line:
             try:
@@ -38,6 +40,6 @@ def main():
     plt.xlabel('Time')
     plt.ylabel('Position')
     plt.show()
-
+'''
 if __name__ == "__main__":
     main()
