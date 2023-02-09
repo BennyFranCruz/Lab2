@@ -15,7 +15,9 @@ def main():
     with serial.Serial ('COM6', 115200) as s_port:
         while (True):
             data_array = []
+            print(s_port.readline())
             data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
+            print('got')
             if data_array == "hello":#if its blank break out of the while loop
                 break
             try:
