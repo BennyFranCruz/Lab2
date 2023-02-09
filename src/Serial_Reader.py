@@ -18,11 +18,12 @@ def main():
             print(s_port.readline())
             data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
             print('got')
+            print(data_array)
             if data_array == "hello":#if its blank break out of the while loop
                 break
             try:
-                x_data_float = float(data_array[0])
-                y_data_float = float(y_data_array[1])
+                x_data_float = float(data_array[0][1])
+                y_data_float = float(y_data_array[0][1])
                 x_data.append(x_data_float)
                 y_data.append(y_data_float)
             except ValueError:
