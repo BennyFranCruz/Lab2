@@ -13,7 +13,6 @@ TODO:  Test edge cases
 """
 
 import pyb
-pyb.repl_uart(None)
 import utime
 
 import motor_driver    #Classes we have written for driving the motor and reading the encoder
@@ -28,7 +27,6 @@ def main():
     @param   Always when run as "__main__"
     @returns none
     """
-    u2 = pyb.UART(2, baudrate=115200)
     
     #Encoder initializing. Includes defining the timer and the pins for our encoder class
     pinB6 = pyb.Pin(pyb.Pin.board.PB6, pyb.Pin.IN)
@@ -54,16 +52,22 @@ def main():
     
     data_x = []
     data_y = []
+    
+    u2 = pyb.UART(2, baudrate=115200, timeout=2000)
+    
     while (True):
         
-        #print(u2.read())
+        message = u2.read(20)
+        print(message)
         
-        position = encode.read()
-        control_output = controller.run(-100, position)
+        #u2.write(f"Count:\r\n")
+        
+        #position = encode.read()
+        #control_output = controller.run(-100, position)
 
-        print(control_output)
-        moe.set_duty_cycle(control_output)
-        utime.sleep(.01)
+        #print(control_output)
+        #moe.set_duty_cycle(control_output)
+
         
         
        
