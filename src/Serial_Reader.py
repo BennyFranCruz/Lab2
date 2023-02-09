@@ -2,11 +2,15 @@ import serial
 import matplotlib.pyplot as plt
 
 def main():
-    with serial.Serial ('COM3', 115200) as s_port:
+    with serial.Serial ('COM3', baudrate=115200) as s_port:
         #input1 = input('kp Value ')
-        #print(input1)
-        #input1 = bytes(input1, 'utf-8')
-        s_port.write (b'something')
+            while (True):
+                s_port.write(b'2')
+                print("cycled")
+        
+        #x = s_port.readline()
+        #print(x)
+        
 '''
     while (True):              
         try:
@@ -41,5 +45,6 @@ def main():
     plt.ylabel('Position')
     plt.show()
 '''
+
 if __name__ == "__main__":
     main()
