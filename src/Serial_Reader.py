@@ -4,47 +4,38 @@ import matplotlib.pyplot as plt
 def main():
     with serial.Serial ('COM3', baudrate=115200) as s_port:
         #input1 = input('kp Value ')
-            while (True):
-                s_port.write(b'2')
-                print("cycled")
+        while (True):
+            s_port.write(b'2')
+            print("cycled")
         
         #x = s_port.readline()
         #print(x)
         
-'''
-    while (True):              
-        try:
-            with serial.Serial ('COM3', 115200) as s_port:     
-                data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
-        
-        except UnicodeError: #run and see what error happens
-            break
-                     
-    float_array = []
-    float_list = []
+    #x_data = []
+    #y_data = []
+    
+    #with serial.Serial ('COM3', 115200) as s_port:
+    #    while (True):
+    #        data_array = []
+    #        data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
+    #        try:
+    #            x_data_float = float(data_array[0])
+    #            y_data_float = float(y_data_array[1])
+    #            x_data.append(x_data_float)
+    #            y_data.append(y_data_float)
+    #        except ValueError:
+    #            continue
+    #        except IndexError:
+    #            continue
+    #        except UnicodeError: #Set this to be the error that occurs when there is no data left
+    #            break
+    
+    #plt.plot(x_data, y_data)
+    #plt.suptitle('Proportional Control Response')
+    #plt.xlabel('Time')
+    #plt.ylabel('Position')
+    #plt.show()
 
-    for line in data_array:
-        for val in line:
-            try:
-                data_float = float(val)
-                float_list.append(data_float)
-            except ValueError:
-                break
-            except IndexError:
-                break
-        if(len(float_list) > 1):
-            float_array.append(float_list) 
-        float_list = []
-    
-    x_data = [row[0] for row in float_array]
-    y_data = [row[1] for row in float_array]
-    
-    plt.plot(x_data, y_data)
-    plt.suptitle('Proportional Control Response')
-    plt.xlabel('Time')
-    plt.ylabel('Position')
-    plt.show()
-'''
 
 if __name__ == "__main__":
     main()
