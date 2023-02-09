@@ -5,7 +5,7 @@ def main():
     with serial.Serial ('COM3', baudrate=115200) as s_port:
         #input1 = input('kp Value ')
             while (True):
-                s_port.write(b'2')
+                s_port.write(b'something')
                 print("cycled")
         
         #x = s_port.readline()
