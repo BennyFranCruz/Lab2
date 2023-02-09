@@ -57,7 +57,7 @@ def main():
     
     while (True):
         
-        message = u2.read(20)
+        message = u2.readline()
         print(message)
         
         #u2.write(f"Count:\r\n")
