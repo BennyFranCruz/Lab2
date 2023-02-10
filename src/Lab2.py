@@ -65,7 +65,6 @@ def main():
     encode.zero()
     controller = porportional_controller.PorportionalController(kp)
     
-    
     inittime = utime.ticks_ms()
     time = [0]
     pos = [0]
@@ -75,7 +74,7 @@ def main():
         if ((utime.ticks_ms() - inittime)%10 == 0):
             
             position = encode.read()
-            control_output = controller.run(1000, position)
+            control_output = controller.run(2000, position)
 
             #print(control_output)
             moe.set_duty_cycle(control_output)
@@ -84,18 +83,19 @@ def main():
             pos.append(position)
             
             utime.sleep_ms(5)
-            print(position)
+            #print(position)
             
     i = 0
     
     while i <= 200:
         
-        timedata = bytes(time[i])
-        posdata = bytes(pos[i])
-        u2.write(f"{timedata},{posdata}\r\n")
+        timedata = time[i]
+        posdata = pos[i]
+        u2.write(f'{timedata},{posdata}\r\n')
         print(pos[i])
         
         i+=1
+    u2.write(f'end,end\r\n')
 
 
 if __name__ == "__main__":
