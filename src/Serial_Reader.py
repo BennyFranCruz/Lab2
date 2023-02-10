@@ -32,7 +32,7 @@ def main():
                 break
     
     plt.plot(x_data, y_data)
-    plt.suptitle('Proportional Control Response')
+    plt.suptitle('Slow Settling Response')
     plt.xlabel('Time')
     plt.ylabel('Position')
     plt.show()
