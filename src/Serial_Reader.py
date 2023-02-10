@@ -15,15 +15,13 @@ def main():
     with serial.Serial ('COM6', 115200) as s_port:
         while (True):
             data_array = []
-            print(s_port.readline())
-            data_array.append(s_port.readline().replace(b" ", b"").strip().split(b","))
-            print('got')
-            print(data_array)
-            if data_array == "hello":#if its blank break out of the while loop
+            data = s_port.readline()
+            data_array.append(data.strip().split(b","))
+            if data_array[0][0] == b'end':#if its blank break out of the while loop
                 break
             try:
-                x_data_float = float(data_array[0][1])
-                y_data_float = float(y_data_array[0][1])
+                x_data_float = float(data_array[0][0])
+                y_data_float = float(data_array[0][1])
                 x_data.append(x_data_float)
                 y_data.append(y_data_float)
             except ValueError:
