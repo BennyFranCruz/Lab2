@@ -37,7 +37,7 @@ def main():
     
     #calling the encoder class, then calling the zero() function to zero the encoder
     encode = encoder_reader.Encoder(pinB6, pinB7, timer, ch1, ch2)
-    encode.zero()
+    
     
     #Motor driver initializing. Includes defining pin and setting up the PWM timer
     pinB4 = pyb.Pin(pyb.Pin.board.PB4, pyb.Pin.OUT_PP)
@@ -48,29 +48,56 @@ def main():
     #calling the motor driver class and giving the object name "moe"
     moe = motor_driver.MotorDriver(pinA10,pinB4,pinB5, timer)
     
-    controller = porportional_controller.PorportionalController(.01, 0)
+    
     
     data_x = []
     data_y = []
     
-    u2 = pyb.UART(2, baudrate=115200, timeout=2000)
+    u2 = pyb.UART(2, baudrate=115200, timeout= 50)
     
-    while (True):
-        
-        message = u2.read(20)
-        print(message)
-        
-        #u2.write(f"Count:\r\n")
-        
-        #position = encode.read()
-        #control_output = controller.run(-100, position)
+    #logic for checking for user input 
+    kp = 0
+    while kp == 0 or kp == None:
+        kp = u2.readline()
+    
+    kp = float(kp)
+    
+    encode.zero()
+    controller = porportional_controller.PorportionalController(kp)
+    
+    
+    inittime = utime.ticks_ms()
+    time = [0]
+    pos = [0]
 
-        #print(control_output)
-        #moe.set_duty_cycle(control_output)
+    while (utime.ticks_ms() - inittime <= 2000):
+            
+        if ((utime.ticks_ms() - inittime)%10 == 0):
+            
+            position = encode.read()
+            control_output = controller.run(1000, position)
 
+            #print(control_output)
+            moe.set_duty_cycle(control_output)
+                
+            time.append(utime.ticks_ms() - inittime)
+            pos.append(position)
+            
+            utime.sleep_ms(5)
+            print(position)
+            
+    i = 0
+    
+    while i <= 200:
         
+        timedata = bytes(time[i])
+        posdata = bytes(pos[i])
+        u2.write(f"{timedata},{posdata}\r\n")
+        print(pos[i])
         
-       
+        i+=1
+
+
 if __name__ == "__main__":
     main()
         

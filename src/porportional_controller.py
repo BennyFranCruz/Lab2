@@ -1,13 +1,12 @@
 class PorportionalController:   
     
-    def __init__(self, Kp, initial_setpoint):
+    def __init__(self, Kp):
         
         self.Kp = Kp
-        self.setpoint = initial_setpoint
         
-    def run(self, setpoint, position):
+    def run(self, setpoint, currentposition):
         
-        self.p_control_out = -self.Kp*(setpoint - position)
+        self.p_control_out = -self.Kp*(setpoint - currentposition)
         
         if self.p_control_out > 100:
             self.p_control_out = 100
