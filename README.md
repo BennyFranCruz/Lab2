@@ -28,8 +28,8 @@ worlds, with small overshoot, little ringing, and a fast settling time.
 [^2]: (Settling time is the amount of time the motor takes to reach rest
     at the desired position)
 
-![alt text](Optimal_Response.jpg)
+![Optimal_Response](Optimal_Response.png)
 
-![alt text](Slow_Settling.jpg)
+![Slow_Settling](Slow_Settling.png)
 
-![alt text](Ringing_Response.jpg)
+![Ringing_Response](Ringing_Response.png)
